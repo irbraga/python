@@ -2,40 +2,49 @@
 # -*- coding: utf-8 -*-
 import sys
 import time
-import FileDigger
+from digger import FileDigger
 
 
 def init(args):
+    """
+        :param args:
+        :return: None
 
-    t_inicial = time.time()
+        Initial main start method.
 
-    # Arquivo inicial para a busca
-    arquivo_inicial = args[1]
+        Here the initial folder scanning will start based on the first parameter, it should be a folder or file.
 
-    print("\nIniciando o processo de identificação de arquivos duplicados pelo MD5!")
-    print("Arquivo inicial: " + arquivo_inicial)
+        args[1] - Initial folder.
+    """
 
-    # Iniciar a busca por arquivos e sub-diretórios
-    hashes_duplicados = FileDigger.digg_files(arquivo_inicial)
+    t_app_startup = time.time()
 
-    # Escreve o resultado em um arquivo csv
-    fileTxt = open("arquivos-duplicados.txt", "w")
+    # Initial folder
+    initial_folder = args[1]
 
-    fileTxt.write("Arquivos duplicados da pasta %s\n\n" % arquivo_inicial)
+    print("\nStarting identification duplicated files process by MD5 hash!")
+    print("Initial folder: " + initial_folder)
 
-    for key,val in hashes_duplicados.items():
-        print("Hash: %s" % key)
-        fileTxt.write("Hash: %s\n" % key)
+    # Start digging files...
+    duplicated_hashes = FileDigger.dig(initial_folder)
+
+    # Write the result in a csv file
+    file_txt = open("duplicates-found.txt", "w")
+
+    file_txt.write("Duplicated files founded in folder %s\n\n" % initial_folder)
+
+    for key, val in duplicated_hashes.items():
+        print("Hash Key: %s" % key)
+        file_txt.write("Hash Key: %s\n" % key)
         for item in val:
-            print("\tCaminho - %s" % item)
-            fileTxt.write("\tCaminho - %s\n" % item)
+            print("\tPath - %s" % item)
+            file_txt.write("\tPath - %s\n" % item)
 
-    t_decorrido = time.time() - t_inicial
+    t_app_ended = time.time() - t_app_startup
 
-    print("\nFinalizado em %.3f." % t_decorrido)
-    fileTxt.write(("\nFinalizado em %.3f." % t_decorrido))
+    file_txt.write(("\nFinished in %.3f." % t_app_ended))
 
-    fileTxt.close()
+    file_txt.close()
 
 
 # Main

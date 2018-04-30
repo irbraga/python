@@ -1,7 +1,0 @@
-Arquivos duplicados da pasta C:\Users\igorb\Downloads\PUC Minas
-
-Hash: d216012c4e616dcb6092a6a6f24cd797
-	Caminho - C:\Users\igorb\Downloads\PUC Minas/puc-minas-boleto-01 - Copia.pdf
-	Caminho - C:\Users\igorb\Downloads\PUC Minas/puc-minas-boleto-01.pdf
-
-Finalizado em 0.031.

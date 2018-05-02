@@ -23,7 +23,7 @@ def init(args):
     initial_folder = args[1]
 
     print("\nStarting identification duplicated files process by MD5 hash!")
-    print("Initial folder: " + initial_folder)
+    print("Initial folder: " + initial_folder + "\n")
 
     # Start digging files...
     duplicated_hashes = FileDigger.dig(initial_folder)
@@ -33,16 +33,16 @@ def init(args):
 
     file_txt.write("Duplicated files founded in folder %s\n\n" % initial_folder)
 
-    for key, val in duplicated_hashes.items():
-        print("Hash Key: %s" % key)
-        file_txt.write("Hash Key: %s\n" % key)
-        for item in val:
+    for record in duplicated_hashes:
+        print("Hash Key: %s" % record['hash'])
+        file_txt.write("Hash Key: %s\n" % record['hash'])
+        for item in record['path']:
             print("\tPath - %s" % item)
             file_txt.write("\tPath - %s\n" % item)
 
     t_app_ended = time.time() - t_app_startup
 
-    file_txt.write(("\nFinished in %.3f." % t_app_ended))
+    file_txt.write(("\nFinished in %.3f seconds." % t_app_ended))
 
     file_txt.close()
 

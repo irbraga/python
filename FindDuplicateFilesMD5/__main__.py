@@ -31,7 +31,7 @@ def init(args):
     # Write the result in a csv file
     file_txt = open("duplicates-found.txt", "w")
 
-    file_txt.write("Duplicated files founded in folder %s\n\n" % initial_folder)
+    file_txt.write("Duplicated files found in folder %s\n\n" % initial_folder)
 
     for record in duplicated_hashes:
         print("Hash Key: %s" % record['hash'])
@@ -45,6 +45,8 @@ def init(args):
     file_txt.write(("\nFinished in %.3f seconds." % t_app_ended))
 
     file_txt.close()
+
+    print(("\nFinished in %.3f seconds." % t_app_ended))
 
 
 # Main

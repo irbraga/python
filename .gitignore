@@ -102,3 +102,6 @@ ENV/
 
 # JetBrains - Arquivos
 .idea/
+
+# Visual Studio Code
+.vscode/

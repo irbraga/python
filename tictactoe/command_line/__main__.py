@@ -36,36 +36,42 @@ def play():
     while(True):
 
         printMatrix(matrix)
-        input_coordenates = input('\n (P{}) Coordenates: '.format(players[index%2]['player']))
 
-        if len(input_coordenates) > 0:
-            coordenates = input_coordenates.split()            
+        if checkAvailablePlays(matrix):
 
-            if (type(coordenates[0]) is str) and coordenates[0] == 'q':
-                print('See you next time! ;)')
-                break
+            input_coordenates = input('\n (P{}) Coordenates: '.format(players[index%2]['player']))
 
-            elif len(coordenates) == 2:
-                row = int(coordenates[0])
-                col = int(coordenates[1])
+            if len(input_coordenates) > 0:
+                coordenates = input_coordenates.split()            
 
-                if 0 <= row <= 2 and 0 <= col <= 2:
-                    if matrix[row][col] != ' ':
-                        print('Not empty, try again.')
+                if (type(coordenates[0]) is str) and coordenates[0] == 'q':
+                    print('See you next time! ;)')
+                    break
+
+                elif len(coordenates) == 2:
+                    row = int(coordenates[0])
+                    col = int(coordenates[1])
+
+                    if 0 <= row <= 2 and 0 <= col <= 2:
+                        if matrix[row][col] != ' ':
+                            print('Not empty, try again.')
+                        else:
+                            matrix[row][col] = players[index%2]['symbol']
+                        
+                        if checkWinner(matrix,players[index%2]['symbol']):
+                            printMatrix(matrix)
+                            print('Congractulations Player {}, you Win!!!'.format(players[index%2]['player']))
+                            break
+                        else:
+                            # Increment index
+                            index += 1
                     else:
-                        matrix[row][col] = players[index%2]['symbol']
-                    
-                    if checkWinner(matrix,players[index%2]['symbol']):
-                        printMatrix(matrix)
-                        print('Congractulations Player {}, you Win!!!'.format(players[index%2]['player']))
-                        break
-                    else:
-                        # Increment index
-                        index += 1
+                        print('Sorry, only accept tow values between 0 and 2... ;)\n')
                 else:
-                    print('Sorry, only accept tow values between 0 and 2... ;)\n')
-            else:
-                print('Not a valid input... Try again!')
+                    print('Not a valid input... Try again!')
+        else:
+            print('Game over!! Draw game!')
+            exit (0)
 
 # Check for a Winner
 def checkWinner(matrix, symbol):
@@ -87,9 +93,13 @@ def checkWinner(matrix, symbol):
 
     return False
 
-# Verify if all the itens in the row are equal to the playre's symbol
+# Verify if all the itens in the row are equal to the player's symbol
 def check(row,symbol):
     return np.all([row[i] == symbol for i in range(len(row))])
+
+# Verify if there's available empty slots to play
+def checkAvailablePlays(matrix):
+    return ' ' in matrix
 
 # Main
 if __name__ == '__main__':

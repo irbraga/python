@@ -2,18 +2,27 @@
 # -*- coding: utf-8 -*-
 import sys
 import numpy as np
+import logging
+
+# Configuring log
+logging.basicConfig(filename='tictactoe.log', level=logging.DEBUG, format='%(asctime)s - %(message)s', datefmt='%Y/%m/%d %I:%M:%S (%p)')
 
 # Welcome messages
 def welcome():
     print('Welcome to my TicTacToe Python game!\n')
     print('Let get started! For start the first player digit the coordenates as: row column (Ex.: 0 2)')
     print('The accepted values are 0, 1 or 2 for rows or columns.')
-    print('Please player 1 start the game or press q to quit the game.\n')
+    print('Please player 1 start the game or press q to quit the game.\n')    
 
 # Print the Matrix
-def printMatrix(matrix):
+def printMatrix(matrix, player):
+
+    logging.debug('--- Play (P{}) ---'.format(player))
     for row in range(len(matrix)):
         print(matrix[row])
+        logging.debug(matrix[row])
+    
+    logging.debug('-----------------')
 
 # Loop the playing
 def play():
@@ -35,7 +44,7 @@ def play():
 
     while(True):
 
-        printMatrix(matrix)
+        printMatrix(matrix, players[index%2]['player'])
 
         if checkAvailablePlays(matrix):
 
@@ -59,7 +68,7 @@ def play():
                             matrix[row][col] = players[index%2]['symbol']
                         
                         if checkWinner(matrix,players[index%2]['symbol']):
-                            printMatrix(matrix)
+                            printMatrix(matrix, players[index%2]['player'])
                             print('Congractulations Player {}, you Win!!!'.format(players[index%2]['player']))
                             break
                         else:

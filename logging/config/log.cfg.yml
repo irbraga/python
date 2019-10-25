@@ -1,0 +1,27 @@
+version: 1
+formatters:
+  default:
+    format: "[%(asctime)s] %(levelname)s in (%(host)s)%(module)s.%(filename)s: %(message)s"
+  logstash_formatter:
+    class: config.LogstashFormatter
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: default
+    level: DEBUG
+  file:
+    class: logging.FileHandler
+    formatter: default
+    filename: sample.log
+    level: DEBUG
+  json:
+    class: logging.handlers.TimedRotatingFileHandler
+    formatter: logstash_formatter
+    filename: sample.json
+    when: midnight
+    interval: 1
+    backupCount: 5
+    level: DEBUG
+root:
+  level: INFO
+  handlers: [console,file,json]

@@ -1,6 +1,6 @@
 import logging, yaml, os, time
 from logging.config import dictConfig
-from config.custom_formatter import LogstashFormatter
+from config.custom_formatter import LogstashFormatter # Import the class referenced in log.cfg.yml.
 
 
 # Locating the logging configuration file.

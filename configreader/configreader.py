@@ -32,7 +32,7 @@ class ConfigurationKeys:
     
     def __str__(self):
         '''
-        Return as a json object.
+        Return a str in json format.
         '''
         return json.dumps(self, default=lambda o: o.__dict__, 
             sort_keys=True, indent=4)
@@ -53,7 +53,7 @@ class ConfigurationReader:
 
     def __str__(self):
         '''
-        Return as a json object.
+        Return a str in json format.
         '''
         return json.dumps(self, default=lambda o: o.__dict__, 
             sort_keys=True, indent=4)

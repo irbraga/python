@@ -34,8 +34,7 @@ class ConfigurationKeys:
         '''
         Return a str in json format.
         '''
-        return json.dumps(self, default=lambda o: o.__dict__, 
-            sort_keys=True, indent=4)
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
 class ConfigurationReader:
     '''
@@ -55,5 +54,4 @@ class ConfigurationReader:
         '''
         Return a str in json format.
         '''
-        return json.dumps(self, default=lambda o: o.__dict__, 
-            sort_keys=True, indent=4)
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
